@@ -11,7 +11,7 @@ const __dirname = path.dirname(__filename);
 
 export default defineConfig({
   // Sets the base path for GitHub Pages
-  base: '/timebridgepueb/',
+  base: './timebridgepueb/',
   
   plugins: [
     TanStackRouterVite(), // Capitalized
