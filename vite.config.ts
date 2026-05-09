@@ -2,6 +2,6 @@ import { defineConfig } from 'vite'
 // ... other imports
 
 export default defineConfig({
-  base: '/timebridgepueb/', // THIS LINE IS REQUIRED
-  // ... rest of your config
+  base: '/timebridgepueb/',
+  // ... leave the rest of the code exactly as it is
 })
