@@ -4,10 +4,10 @@ import logo from "@/assets/timebridge-logo.png";
 
 const items = [
   { to: "/", label: "Overview", icon: LayoutDashboard, exact: true },
-  { to: "/seniors", label: "Seniors", icon: Users },
-  { to: "/students", label: "Students", icon: GraduationCap },
-  { to: "/matching", label: "Matching", icon: Sparkles },
-  { to: "/reports", label: "Impact", icon: BarChart3 },
+  { to: "/seniors", label: "Seniors", icon: Users, exact: false },
+  { to: "/students", label: "Students", icon: GraduationCap, exact: false },
+  { to: "/matching", label: "Matching", icon: Sparkles, exact: false },
+  { to: "/reports", label: "Impact", icon: BarChart3, exact: false },
 ] as const;
 
 export function AppSidebar() {
