@@ -1,11 +1,15 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import { RouterProvider, createRouter } from '@tanstack/react-router'
-import { routeTree } from './routeTree.gen'
+import { RouterProvider } from '@tanstack/react-router'
+import { createRouter } from './router' 
 import './styles.css'
 
-// This creates the frontend router, completely ignoring the server setup
-const router = createRouter({ routeTree })
+// Create the router using your project's existing logic
+const router = createRouter()
+
+// This is the magic line that fixes the "This page didn't load" error
+// It tells the router it lives inside the /timebridge/ folder
+router.options.basepath = '/timebridge/'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
