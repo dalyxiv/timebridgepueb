@@ -10,6 +10,8 @@ export const getRouter = () => {
     context: { queryClient },
     scrollRestoration: true,
     defaultPreloadStaleTime: 0,
+    // This tells the router it is living inside the subfolder
+    basepath: '/timebridgepueb', 
   });
 
   return router;
