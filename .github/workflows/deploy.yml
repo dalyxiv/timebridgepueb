@@ -31,7 +31,7 @@ jobs:
       - name: Upload Artifacts
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './.output/public' # This is where TanStack/Lovable builds go
+          path: './dist' # This is where TanStack/Lovable builds go
 
   deploy:
     needs: build_site
