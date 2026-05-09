@@ -9,8 +9,32 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as StudentsRouteImport } from './routes/students'
+import { Route as SeniorsRouteImport } from './routes/seniors'
+import { Route as ReportsRouteImport } from './routes/reports'
+import { Route as MatchingRouteImport } from './routes/matching'
 import { Route as IndexRouteImport } from './routes/index'
 
+const StudentsRoute = StudentsRouteImport.update({
+  id: '/students',
+  path: '/students',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SeniorsRoute = SeniorsRouteImport.update({
+  id: '/seniors',
+  path: '/seniors',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ReportsRoute = ReportsRouteImport.update({
+  id: '/reports',
+  path: '/reports',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MatchingRoute = MatchingRouteImport.update({
+  id: '/matching',
+  path: '/matching',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -19,28 +43,72 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/matching': typeof MatchingRoute
+  '/reports': typeof ReportsRoute
+  '/seniors': typeof SeniorsRoute
+  '/students': typeof StudentsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/matching': typeof MatchingRoute
+  '/reports': typeof ReportsRoute
+  '/seniors': typeof SeniorsRoute
+  '/students': typeof StudentsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/matching': typeof MatchingRoute
+  '/reports': typeof ReportsRoute
+  '/seniors': typeof SeniorsRoute
+  '/students': typeof StudentsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/matching' | '/reports' | '/seniors' | '/students'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/matching' | '/reports' | '/seniors' | '/students'
+  id: '__root__' | '/' | '/matching' | '/reports' | '/seniors' | '/students'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  MatchingRoute: typeof MatchingRoute
+  ReportsRoute: typeof ReportsRoute
+  SeniorsRoute: typeof SeniorsRoute
+  StudentsRoute: typeof StudentsRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/students': {
+      id: '/students'
+      path: '/students'
+      fullPath: '/students'
+      preLoaderRoute: typeof StudentsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/seniors': {
+      id: '/seniors'
+      path: '/seniors'
+      fullPath: '/seniors'
+      preLoaderRoute: typeof SeniorsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reports': {
+      id: '/reports'
+      path: '/reports'
+      fullPath: '/reports'
+      preLoaderRoute: typeof ReportsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/matching': {
+      id: '/matching'
+      path: '/matching'
+      fullPath: '/matching'
+      preLoaderRoute: typeof MatchingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -53,7 +121,21 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  MatchingRoute: MatchingRoute,
+  ReportsRoute: ReportsRoute,
+  SeniorsRoute: SeniorsRoute,
+  StudentsRoute: StudentsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
