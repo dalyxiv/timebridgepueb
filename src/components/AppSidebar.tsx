@@ -4,11 +4,11 @@ import logo from "@/assets/timebridge-logo.png";
 import uniLogo from "@/assets/poznan-university.png";
 
 const items = [
-  { to: "/", label: "Overview", icon: LayoutDashboard, exact: true },
-  { to: "/seniors", label: "Seniors", icon: Users, exact: false },
-  { to: "/students", label: "Students", icon: GraduationCap, exact: false },
-  { to: "/matching", label: "Matching", icon: Sparkles, exact: false },
-  { to: "/reports", label: "Impact", icon: BarChart3, exact: false },
+  { to: "/dashboard", label: "Overview", icon: LayoutDashboard, exact: true },
+  { to: "/seniors", label: "User Management", icon: Users, exact: false },
+  { to: "/students", label: "Mentors", icon: GraduationCap, exact: false },
+  { to: "/matching", label: "Smart Match", icon: Sparkles, exact: false },
+  { to: "/reports", label: "Impact Reports", icon: BarChart3, exact: false },
 ] as const;
 
 export function AppSidebar() {
@@ -20,11 +20,11 @@ export function AppSidebar() {
       <div className="pointer-events-none absolute -top-24 -left-16 h-72 w-72 rounded-full bg-brand/30 blur-3xl" />
       <div className="pointer-events-none absolute bottom-0 -right-16 h-64 w-64 rounded-full bg-brand-glow/20 blur-3xl" />
 
-      <div className="relative px-5 py-5 border-b border-sidebar-border/60">
-        <div className="rounded-xl bg-white/95 backdrop-blur px-3 py-2 shadow-soft inline-flex">
-          <img src={logo} alt="TimeBridge" className="h-7 w-auto" />
-        </div>
-        <p className="mt-3 text-[10px] tracking-[0.2em] uppercase text-sidebar-foreground/50">
+      <div className="relative px-5 py-6 border-b border-sidebar-border/60">
+        <Link to="/" className="block rounded-2xl bg-white px-4 py-3 shadow-soft ring-1 ring-white/40 hover:scale-[1.02] transition-transform">
+          <img src={logo} alt="TimeBridge" className="h-12 w-auto" />
+        </Link>
+        <p className="mt-3 text-[10px] tracking-[0.2em] uppercase text-sidebar-foreground/60">
           Intergenerational · Digital · Inclusion
         </p>
       </div>
@@ -39,13 +39,13 @@ export function AppSidebar() {
               to={it.to}
               className={`group relative flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-all ${
                 active
-                  ? "bg-gradient-brand text-sidebar-primary-foreground shadow-glow"
-                  : "text-sidebar-foreground/75 hover:bg-sidebar-accent/60 hover:text-sidebar-accent-foreground"
+                  ? "bg-[#ffd03a] text-[#014bad] shadow-yellow"
+                  : "text-sidebar-foreground/80 hover:bg-white/10 hover:text-white"
               }`}
             >
               <Icon className={`h-4 w-4 transition-transform ${active ? "" : "group-hover:scale-110"}`} />
               {it.label}
-              {active && <span className="absolute right-3 h-1.5 w-1.5 rounded-full bg-white animate-pulse-glow" />}
+              {active && <span className="absolute right-3 h-1.5 w-1.5 rounded-full bg-[#014bad] animate-pulse-glow" />}
             </Link>
           );
         })}
