@@ -84,7 +84,7 @@ export function MobileNav() {
               key={it.to}
               to={it.to}
               className={`flex items-center gap-1.5 whitespace-nowrap rounded-md px-3 py-1.5 text-xs font-medium transition-colors ${
-                active ? "bg-gradient-brand text-sidebar-primary-foreground shadow-glow" : "text-sidebar-foreground/80"
+                active ? "bg-[#ffd03a] text-[#014bad] shadow-yellow" : "text-sidebar-foreground/80"
               }`}
             >
               <Icon className="h-3.5 w-3.5" />
