@@ -6,7 +6,7 @@ import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, PieChart, Pi
 
 export const Route = createFileRoute("/reports")({ component: ReportsPage });
 
-const COLORS = ["#06B6D4", "#1E293B", "#7DD3FC", "#0E7490", "#94A3B8"];
+const COLORS = ["#014bad", "#ffd03a", "#0b66d8", "#ffb800", "#6b91d4"];
 
 function ReportsPage() {
   const { matches, seniors } = useApp();
@@ -54,7 +54,7 @@ function ReportsPage() {
                   <XAxis dataKey="week" stroke="#64748B" fontSize={12} />
                   <YAxis stroke="#64748B" fontSize={12} />
                   <Tooltip contentStyle={{ borderRadius: 8, border: "1px solid #E2E8F0" }} />
-                  <Bar dataKey="hours" fill="#06B6D4" radius={[6, 6, 0, 0]} />
+                  <Bar dataKey="hours" fill="#014bad" radius={[6, 6, 0, 0]} />
                 </BarChart>
               </ResponsiveContainer>
             </div>
@@ -67,7 +67,7 @@ function ReportsPage() {
             <div className="h-72">
               <ResponsiveContainer width="100%" height="100%">
                 <PieChart>
-                  <Pie data={demoData} dataKey="value" nameKey="name" outerRadius={90} label>
+                  <Pie data={demoData} dataKey="value" nameKey="name" outerRadius={90} innerRadius={50} paddingAngle={3} label>
                     {demoData.map((_, i) => <Cell key={i} fill={COLORS[i % COLORS.length]} />)}
                   </Pie>
                   <Tooltip />
@@ -88,7 +88,7 @@ function ReportsPage() {
                   <XAxis type="number" stroke="#64748B" fontSize={12} />
                   <YAxis dataKey="name" type="category" stroke="#64748B" fontSize={12} width={120} />
                   <Tooltip contentStyle={{ borderRadius: 8, border: "1px solid #E2E8F0" }} />
-                  <Bar dataKey="value" fill="#1E293B" radius={[0, 6, 6, 0]} />
+                  <Bar dataKey="value" fill="#ffd03a" radius={[0, 6, 6, 0]} />
                 </BarChart>
               </ResponsiveContainer>
             </div>

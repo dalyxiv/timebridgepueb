@@ -1,152 +1,124 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useApp } from "@/lib/store";
-import { PageHeader } from "@/components/PageHeader";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Users, GraduationCap, Heart, Clock, ArrowRight, AlertCircle, TrendingUp, Activity } from "lucide-react";
+import { ArrowRight, Sparkles, Users, BarChart3, Heart, ShieldCheck, Zap } from "lucide-react";
+import logo from "@/assets/timebridge-logo.png";
+import uniLogo from "@/assets/poznan-university.png";
 
 export const Route = createFileRoute("/")({
-  component: Overview,
+  component: Landing,
 });
 
-const fmtDate = (iso: string) => {
-  const d = new Date(iso);
-  const yyyy = d.getUTCFullYear();
-  const mm = String(d.getUTCMonth() + 1).padStart(2, "0");
-  const dd = String(d.getUTCDate()).padStart(2, "0");
-  return `${yyyy}-${mm}-${dd}`;
-};
-
-function StatCard({ icon: Icon, label, value, delta, accent }: { icon: any; label: string; value: string | number; delta?: string; accent?: boolean }) {
+function Landing() {
   return (
-    <div className={`group relative overflow-hidden rounded-2xl border border-border bg-card p-5 hover-lift ${accent ? "ring-glow" : "shadow-soft"}`}>
-      <div className="pointer-events-none absolute -top-12 -right-12 h-32 w-32 rounded-full bg-brand/10 blur-2xl group-hover:bg-brand/20 transition-colors" />
-      <div className="relative flex items-start justify-between">
-        <div>
-          <p className="text-[11px] font-semibold tracking-[0.18em] text-muted-foreground uppercase">{label}</p>
-          <p className="text-3xl font-semibold mt-2 text-foreground tabular-nums">{value}</p>
-          {delta && (
-            <p className="mt-1 inline-flex items-center gap-1 text-xs text-success">
-              <TrendingUp className="h-3 w-3" /> {delta}
-            </p>
-          )}
+    <div className="relative min-h-screen overflow-hidden bg-background">
+      {/* animated background blobs */}
+      <div className="pointer-events-none absolute inset-0 -z-10">
+        <div className="absolute -top-40 -left-32 h-[28rem] w-[28rem] rounded-full bg-[#014bad]/20 blur-3xl animate-blob" />
+        <div className="absolute -top-20 right-[-8rem] h-[26rem] w-[26rem] rounded-full bg-[#ffd03a]/30 blur-3xl animate-blob delay-200" />
+        <div className="absolute bottom-[-10rem] left-1/3 h-[24rem] w-[24rem] rounded-full bg-[#014bad]/15 blur-3xl animate-blob delay-400" />
+      </div>
+
+      {/* nav */}
+      <header className="relative z-10 mx-auto max-w-7xl px-6 py-6 flex items-center justify-between animate-fade-in">
+        <div className="rounded-2xl bg-white px-5 py-3 shadow-soft ring-1 ring-[#014bad]/10">
+          <img src={logo} alt="TimeBridge" className="h-12 w-auto sm:h-14" />
         </div>
-        <div className={`rounded-xl p-2.5 ${accent ? "bg-gradient-brand text-brand-foreground shadow-glow" : "bg-accent text-accent-foreground"}`}>
-          <Icon className="h-5 w-5" />
+        <div className="hidden sm:flex items-center gap-3 rounded-xl bg-white/80 backdrop-blur px-3 py-2 shadow-soft">
+          <img src={uniLogo} alt="Poznań University of Economics and Business" className="h-8 w-auto" />
         </div>
-      </div>
-    </div>
-  );
-}
+      </header>
 
-function Overview() {
-  const { seniors, students, matches, activity } = useApp();
-  const activeMatches = matches.length;
-  const totalHours = matches.reduce((sum, m) => sum + m.hoursLogged, 0);
-  const matchedSeniorIds = new Set(matches.map((m) => m.seniorId));
-  const seniorsAwaiting = seniors.filter((s) => !matchedSeniorIds.has(s.id) && s.status === "active").length;
-  const studentsPending = students.filter((s) => s.status === "pending").length;
-  const seniorsPending = seniors.filter((s) => s.status === "pending").length;
+      {/* hero */}
+      <section className="relative z-10 mx-auto max-w-7xl px-6 pt-12 pb-20 sm:pt-20 sm:pb-28 text-center">
+        <div className="inline-flex items-center gap-2 rounded-full bg-white/80 backdrop-blur px-4 py-1.5 text-xs font-semibold text-[#014bad] ring-1 ring-[#014bad]/15 shadow-soft animate-fade-in-up">
+          <Sparkles className="h-3.5 w-3.5 text-[#ffb800]" />
+          B2B / B2G platform for digital inclusion
+        </div>
 
-  return (
-    <>
-      <PageHeader
-        eyebrow="Operations Console"
-        title="Welcome back, Program Lead"
-        description="Real-time view of onboarding, matching, and mentorship impact across your TimeBridge cohort."
-      />
+        <h1 className="mt-6 text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-[#014bad] animate-fade-in-up delay-200 leading-[1.05]">
+          TimeBridge: Scaling{" "}
+          <span className="relative inline-block">
+            <span className="relative z-10">Intergenerational</span>
+            <span className="absolute inset-x-0 bottom-1 h-3 sm:h-4 bg-[#ffd03a] rounded-sm -z-0" />
+          </span>{" "}
+          Digital Inclusion.
+        </h1>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <StatCard icon={Users} label="Active Seniors" value={seniors.filter(s => s.status === "active").length} delta="+2 this week" />
-        <StatCard icon={GraduationCap} label="Student Mentors" value={students.filter(s => s.status === "active").length} delta="+1 this week" />
-        <StatCard icon={Heart} label="Active Matches" value={activeMatches} accent />
-        <StatCard icon={Clock} label="Mentorship Hours" value={totalHours} delta="+5h this week" />
-      </div>
+        <p className="mx-auto mt-6 max-w-2xl text-base sm:text-lg text-slate-600 animate-fade-in-up delay-400">
+          The complete institutional platform to automate onboarding, mentor matching, and social impact tracking for municipalities and universities.
+        </p>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mt-6">
-        <Card className="lg:col-span-1 border-border/70 shadow-soft hover-lift overflow-hidden relative">
-          <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-brand to-transparent" />
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-base">
-              <span className="inline-flex items-center justify-center h-7 w-7 rounded-lg bg-brand/10 text-brand">
-                <AlertCircle className="h-4 w-4" />
-              </span>
-              Pending Actions
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-3">
-            <PendingRow count={seniorsAwaiting} label="seniors await matching" to="/matching" />
-            <PendingRow count={studentsPending} label="students pending approval" to="/students" />
-            <PendingRow count={seniorsPending} label="seniors pending approval" to="/seniors" />
-            {seniorsAwaiting + studentsPending + seniorsPending === 0 && (
-              <p className="text-sm text-muted-foreground">All caught up — nothing pending.</p>
-            )}
-          </CardContent>
-        </Card>
-
-        <Card className="lg:col-span-2 border-border/70 shadow-soft overflow-hidden relative">
-          <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-brand to-transparent" />
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-base">
-              <span className="inline-flex items-center justify-center h-7 w-7 rounded-lg bg-brand/10 text-brand">
-                <Activity className="h-4 w-4" />
-              </span>
-              Recent Activity
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <ul className="divide-y divide-border">
-              {activity.slice(0, 8).map((a) => (
-                <li key={a.id} className="flex items-center justify-between py-3 text-sm">
-                  <div className="flex items-center gap-3 min-w-0">
-                    <span className="h-1.5 w-1.5 rounded-full bg-brand shrink-0" />
-                    <span className="text-foreground truncate">{a.text}</span>
-                  </div>
-                  <Badge variant="secondary" className="text-xs shrink-0 ml-2">{fmtDate(a.at)}</Badge>
-                </li>
-              ))}
-              {activity.length === 0 && <li className="py-4 text-sm text-muted-foreground">No activity yet.</li>}
-            </ul>
-          </CardContent>
-        </Card>
-      </div>
-
-      {/* Mission strip */}
-      <div className="mt-6 relative overflow-hidden rounded-2xl border border-border bg-card p-6 sm:p-8 shadow-soft">
-        <div className="pointer-events-none absolute -top-16 -right-10 h-56 w-56 rounded-full bg-brand/15 blur-3xl" />
-        <div className="pointer-events-none absolute -bottom-20 -left-10 h-56 w-56 rounded-full bg-brand-glow/15 blur-3xl" />
-        <div className="relative grid sm:grid-cols-[1fr_auto] gap-4 items-center">
-          <div>
-            <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-brand">Mission</p>
-            <h3 className="text-xl font-semibold mt-2">Bridging generations through digital fluency.</h3>
-            <p className="text-sm text-muted-foreground mt-2 max-w-2xl">
-              TimeBridge replaces manual spreadsheets with automated onboarding, smart matching, and live impact reporting — built for institutions that scale digital inclusion.
-            </p>
-          </div>
+        <div className="mt-10 flex items-center justify-center gap-4 animate-fade-in-up delay-600">
           <Link
-            to="/matching"
-            className="inline-flex items-center justify-center rounded-xl bg-gradient-brand px-5 py-2.5 text-sm font-medium text-brand-foreground shadow-glow hover:opacity-95 transition-opacity"
+            to="/dashboard"
+            className="group relative inline-flex items-center justify-center gap-2 rounded-2xl bg-[#ffd03a] px-8 sm:px-10 py-5 sm:py-6 text-lg sm:text-xl font-bold text-[#014bad] shadow-yellow ring-2 ring-[#014bad]/10 transition-all duration-300 hover:scale-[1.04] hover:bg-[#ffc21a] hover:shadow-[0_20px_60px_-15px_rgba(255,208,58,0.9)] active:scale-100 animate-pulse-glow"
           >
-            Open matching engine <ArrowRight className="h-4 w-4 ml-1.5" />
+            Enter Dashboard
+            <ArrowRight className="h-6 w-6 transition-transform group-hover:translate-x-1" />
           </Link>
         </div>
-      </div>
-    </>
-  );
-}
 
-function PendingRow({ count, label, to }: { count: number; label: string; to: string }) {
-  if (count === 0) return null;
-  return (
-    <Link
-      to={to}
-      className="group flex items-center justify-between rounded-xl border border-border bg-accent/30 px-3 py-2.5 hover:bg-accent hover:border-brand/40 transition-all"
-    >
-      <div className="flex items-center gap-3">
-        <span className="inline-flex h-7 w-7 items-center justify-center rounded-lg bg-gradient-brand text-brand-foreground text-xs font-semibold shadow-glow">{count}</span>
-        <span className="text-sm text-foreground">{label}</span>
-      </div>
-      <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:text-brand group-hover:translate-x-0.5 transition-all" />
-    </Link>
+        <p className="mt-6 text-xs text-slate-500 animate-fade-in delay-600">
+          Trusted research initiative · Poznań University of Economics and Business
+        </p>
+      </section>
+
+      {/* value props */}
+      <section className="relative z-10 mx-auto max-w-7xl px-6 pb-24">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {[
+            {
+              icon: Zap,
+              title: "Automated Onboarding",
+              desc: "Replace spreadsheets with guided digital intake for seniors and student mentors — verified, structured, and instant.",
+            },
+            {
+              icon: Sparkles,
+              title: "Smart Matching Algorithm",
+              desc: "Pair mentors and seniors by overlapping tech needs, skills, and availability with a single click.",
+            },
+            {
+              icon: BarChart3,
+              title: "Real-time Impact Reporting",
+              desc: "Live dashboards on hours mentored, demographics served, and social ROI — ready to share with stakeholders.",
+            },
+          ].map((f, i) => (
+            <div
+              key={f.title}
+              className="group relative rounded-3xl bg-white p-7 shadow-soft ring-1 ring-[#014bad]/8 transition-all duration-300 hover:-translate-y-2 hover:shadow-elevated hover:ring-[#014bad]/25 animate-fade-in-up"
+              style={{ animationDelay: `${0.2 * (i + 1)}s` }}
+            >
+              <div className="absolute inset-x-0 top-0 h-1 rounded-t-3xl bg-gradient-to-r from-[#014bad] via-[#ffd03a] to-[#014bad] opacity-0 group-hover:opacity-100 transition-opacity" />
+              <div className="inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-[#014bad] text-white shadow-glow group-hover:bg-[#ffd03a] group-hover:text-[#014bad] transition-colors">
+                <f.icon className="h-7 w-7" />
+              </div>
+              <h3 className="mt-5 text-xl font-bold text-[#014bad]">{f.title}</h3>
+              <p className="mt-2 text-sm text-slate-600 leading-relaxed">{f.desc}</p>
+            </div>
+          ))}
+        </div>
+
+        {/* secondary stats strip */}
+        <div className="mt-14 grid grid-cols-2 sm:grid-cols-4 gap-4 rounded-3xl bg-[#014bad] p-8 text-white shadow-elevated relative overflow-hidden">
+          <div className="pointer-events-none absolute -top-20 -right-20 h-60 w-60 rounded-full bg-[#ffd03a]/20 blur-3xl animate-float" />
+          {[
+            { k: "120+", v: "Seniors onboarded" },
+            { k: "85", v: "Active mentors" },
+            { k: "1,400h", v: "Mentorship logged" },
+            { k: "12", v: "Partner institutions" },
+          ].map((s) => (
+            <div key={s.v} className="relative">
+              <div className="text-3xl sm:text-4xl font-bold text-[#ffd03a]">{s.k}</div>
+              <div className="text-xs sm:text-sm text-white/80 mt-1">{s.v}</div>
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-12 flex flex-wrap items-center justify-center gap-6 text-xs text-slate-500">
+          <span className="inline-flex items-center gap-2"><ShieldCheck className="h-4 w-4 text-[#014bad]" /> GDPR-ready</span>
+          <span className="inline-flex items-center gap-2"><Users className="h-4 w-4 text-[#014bad]" /> Multi-institution</span>
+          <span className="inline-flex items-center gap-2"><Heart className="h-4 w-4 text-[#014bad]" /> Built for social impact</span>
+        </div>
+      </section>
+    </div>
   );
 }
