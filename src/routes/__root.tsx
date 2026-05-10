@@ -95,18 +95,24 @@ function RootShell({ children }: { children: React.ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const path = useRouterState({ select: (r) => r.location.pathname });
+  const isLanding = path === "/";
   return (
     <QueryClientProvider client={queryClient}>
       <AppProvider>
-        <div className="min-h-screen flex bg-background">
-          <AppSidebar />
-          <div className="flex-1 flex flex-col min-w-0 bg-gradient-hero">
-            <MobileNav />
-            <main className="flex-1 px-4 sm:px-8 py-6 sm:py-10 max-w-7xl w-full mx-auto">
-              <Outlet />
-            </main>
+        {isLanding ? (
+          <Outlet />
+        ) : (
+          <div className="min-h-screen flex bg-background">
+            <AppSidebar />
+            <div className="flex-1 flex flex-col min-w-0 bg-gradient-hero">
+              <MobileNav />
+              <main className="flex-1 px-4 sm:px-8 py-6 sm:py-10 max-w-7xl w-full mx-auto">
+                <Outlet />
+              </main>
+            </div>
           </div>
-        </div>
+        )}
         <Toaster richColors position="top-right" />
       </AppProvider>
     </QueryClientProvider>
