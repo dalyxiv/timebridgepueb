@@ -87,11 +87,10 @@ const seedSeniors: Senior[] = [
 ];
 
 const seedStudents: Student[] = [
-  { id: uid(), name: "Maya Patel", grade: "Sophomore", skills: ["Smartphone", "Video Calling", "Social Media"], availability: ["Mon AM", "Wed AM"], status: "active", createdAt: now() },
-  { id: uid(), name: "Jakub Wiśniewski", grade: "Senior", skills: ["Email", "Online Banking", "Word Processing"], availability: ["Tue PM", "Thu PM"], status: "active", createdAt: now() },
-  { id: uid(), name: "Lucas Rivera", grade: "Junior", skills: ["Smartphone", "Email", "Internet Browsing"], availability: ["Thu AM", "Fri PM"], status: "pending", createdAt: now() },
-  { id: uid(), name: "Zofia Lewandowska", grade: "Freshman", skills: ["Video Calling", "Social Media", "Online Shopping"], availability: ["Mon PM", "Fri AM"], status: "active", createdAt: now() },
-  { id: uid(), name: "Aiden Brooks", grade: "Senior", skills: ["Online Shopping", "Internet Browsing", "Word Processing"], availability: ["Wed PM"], status: "pending", createdAt: now() },
+  { id: uid(), name: "Hasan Gelir", grade: "Senior", skills: ["Smartphone", "Video Calling", "Social Media"], availability: ["Mon AM", "Wed AM"], status: "active", createdAt: now() },
+  { id: uid(), name: "Menghu Shu", grade: "Junior", skills: ["Email", "Online Banking", "Word Processing"], availability: ["Tue PM", "Thu PM"], status: "active", createdAt: now() },
+  { id: uid(), name: "Michal", grade: "Sophomore", skills: ["Smartphone", "Email", "Internet Browsing"], availability: ["Thu AM", "Fri PM"], status: "pending", createdAt: now() },
+  { id: uid(), name: "DalY", grade: "Senior", skills: ["Video Calling", "Social Media", "Online Shopping"], availability: ["Mon PM", "Fri AM"], status: "active", createdAt: now() },
 ];
 
 const seedMatches: Match[] = [
