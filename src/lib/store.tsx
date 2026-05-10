@@ -103,8 +103,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const [students, setStudents] = useState<Student[]>(seedStudents);
   const [matches, setMatches] = useState<Match[]>(seedMatches);
   const [activity, setActivity] = useState<Activity[]>([
-    { id: uid(), text: "Match created: Eleanor Whitfield ↔ Maya Patel", at: now() },
-    { id: uid(), text: "Henryk Kowalski logged 2 hours with Jakub Wiśniewski", at: now() },
+    { id: uid(), text: "Match created: Eleanor Whitfield ↔ Hasan Gelir", at: now() },
+    { id: uid(), text: "Henryk Kowalski logged 2 hours with Menghu Shu", at: now() },
   ]);
 
   const log = useCallback((text: string) => {
