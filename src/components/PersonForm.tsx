@@ -6,6 +6,7 @@ import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { ALL_SKILLS, AVAILABILITY, type TechSkill, type Slot } from "@/lib/store";
 import { Plus } from "lucide-react";
+import { toast } from "sonner";
 
 interface Props {
   trigger?: ReactNode;
@@ -30,7 +31,10 @@ export function PersonForm({ trigger, role, onSubmit }: Props) {
   const reset = () => { setName(""); setAge(""); setGrade("Sophomore"); setSkills([]); setAvailability([]); };
 
   const submit = () => {
-    if (!name.trim() || skills.length === 0 || availability.length === 0) return;
+    if (!name.trim()) { toast.error("Please enter a full name"); return; }
+    if (role === "senior" && (!age || Number(age) < 1)) { toast.error("Please enter a valid age"); return; }
+    if (skills.length === 0) { toast.error(role === "senior" ? "Select at least one tech need" : "Select at least one tech skill"); return; }
+    if (availability.length === 0) { toast.error("Select at least one availability slot"); return; }
     onSubmit({
       name: name.trim(),
       age: role === "senior" ? Number(age) || 65 : undefined,

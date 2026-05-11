@@ -1,10 +1,11 @@
 import { Link, useRouterState } from "@tanstack/react-router";
-import { LayoutDashboard, Users, GraduationCap, Sparkles, BarChart3 } from "lucide-react";
+import { LayoutDashboard, Users, GraduationCap, Sparkles, BarChart3, Banknote } from "lucide-react";
 import logo from "@/assets/timebridge-logo.png";
 import uniLogo from "@/assets/poznan-university.png";
 
 const items = [
   { to: "/dashboard", label: "Overview", icon: LayoutDashboard, exact: true },
+  { to: "/finance", label: "Become a Partner", icon: Banknote, exact: false },
   { to: "/seniors", label: "User Management", icon: Users, exact: false },
   { to: "/students", label: "Mentors", icon: GraduationCap, exact: false },
   { to: "/matching", label: "Smart Match", icon: Sparkles, exact: false },

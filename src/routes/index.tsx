@@ -57,9 +57,17 @@ function Landing() {
           </Link>
         </div>
 
-        <p className="mt-6 text-xs text-slate-500 animate-fade-in delay-600">
-          Trusted research initiative · Poznań University of Economics and Business
-        </p>
+        <div className="mt-6 space-y-2 animate-fade-in delay-600">
+          <p className="text-xs text-slate-500">
+            Trusted research initiative · Poznań University of Economics and Business
+          </p>
+          <p className="text-xs text-slate-600">
+            Created by: <span className="font-semibold text-[#014bad]">Menghu Shu</span> &amp; <span className="font-semibold text-[#014bad]">Michał Raczunas</span> &amp; <span className="font-semibold text-[#014bad]">Mostafa ElDaly</span>
+          </p>
+          <p className="text-xs text-slate-500">
+            under supervision of: <span className="font-medium text-slate-700">dr inż. Aleksandra Szulczewska-Remi</span>
+          </p>
+        </div>
       </section>
 
       {/* value props */}

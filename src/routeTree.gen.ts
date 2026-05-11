@@ -13,6 +13,7 @@ import { Route as StudentsRouteImport } from './routes/students'
 import { Route as SeniorsRouteImport } from './routes/seniors'
 import { Route as ReportsRouteImport } from './routes/reports'
 import { Route as MatchingRouteImport } from './routes/matching'
+import { Route as FinanceRouteImport } from './routes/finance'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as IndexRouteImport } from './routes/index'
 
@@ -36,6 +37,11 @@ const MatchingRoute = MatchingRouteImport.update({
   path: '/matching',
   getParentRoute: () => rootRouteImport,
 } as any)
+const FinanceRoute = FinanceRouteImport.update({
+  id: '/finance',
+  path: '/finance',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const DashboardRoute = DashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
@@ -50,6 +56,7 @@ const IndexRoute = IndexRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/dashboard': typeof DashboardRoute
+  '/finance': typeof FinanceRoute
   '/matching': typeof MatchingRoute
   '/reports': typeof ReportsRoute
   '/seniors': typeof SeniorsRoute
@@ -58,6 +65,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/dashboard': typeof DashboardRoute
+  '/finance': typeof FinanceRoute
   '/matching': typeof MatchingRoute
   '/reports': typeof ReportsRoute
   '/seniors': typeof SeniorsRoute
@@ -67,6 +75,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/dashboard': typeof DashboardRoute
+  '/finance': typeof FinanceRoute
   '/matching': typeof MatchingRoute
   '/reports': typeof ReportsRoute
   '/seniors': typeof SeniorsRoute
@@ -77,16 +86,25 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/dashboard'
+    | '/finance'
     | '/matching'
     | '/reports'
     | '/seniors'
     | '/students'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/dashboard' | '/matching' | '/reports' | '/seniors' | '/students'
+  to:
+    | '/'
+    | '/dashboard'
+    | '/finance'
+    | '/matching'
+    | '/reports'
+    | '/seniors'
+    | '/students'
   id:
     | '__root__'
     | '/'
     | '/dashboard'
+    | '/finance'
     | '/matching'
     | '/reports'
     | '/seniors'
@@ -96,6 +114,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   DashboardRoute: typeof DashboardRoute
+  FinanceRoute: typeof FinanceRoute
   MatchingRoute: typeof MatchingRoute
   ReportsRoute: typeof ReportsRoute
   SeniorsRoute: typeof SeniorsRoute
@@ -132,6 +151,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MatchingRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/finance': {
+      id: '/finance'
+      path: '/finance'
+      fullPath: '/finance'
+      preLoaderRoute: typeof FinanceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/dashboard': {
       id: '/dashboard'
       path: '/dashboard'
@@ -152,6 +178,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   DashboardRoute: DashboardRoute,
+  FinanceRoute: FinanceRoute,
   MatchingRoute: MatchingRoute,
   ReportsRoute: ReportsRoute,
   SeniorsRoute: SeniorsRoute,
