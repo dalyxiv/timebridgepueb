@@ -1,5 +1,5 @@
 import { Link, useRouterState } from "@tanstack/react-router";
-import { LayoutDashboard, Users, GraduationCap, Sparkles, BarChart3, Banknote } from "lucide-react";
+import { LayoutDashboard, Users, GraduationCap, Sparkles, BarChart3, Banknote, ShieldAlert } from "lucide-react";
 import logo from "@/assets/timebridge-logo.png";
 import uniLogo from "@/assets/poznan-university.png";
 
@@ -10,6 +10,7 @@ const items = [
   { to: "/students", label: "Mentors", icon: GraduationCap, exact: false },
   { to: "/matching", label: "Smart Match", icon: Sparkles, exact: false },
   { to: "/reports", label: "Impact Reports", icon: BarChart3, exact: false },
+  { to: "/report", label: "Report Misbehavior", icon: ShieldAlert, exact: false },
 ] as const;
 
 export function AppSidebar() {

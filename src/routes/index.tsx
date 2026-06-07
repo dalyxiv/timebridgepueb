@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, Sparkles, Users, BarChart3, Heart, ShieldCheck, Zap } from "lucide-react";
+import { ArrowRight, Sparkles, Users, BarChart3, Heart, ShieldCheck, Zap, ShieldAlert } from "lucide-react";
 import logo from "@/assets/timebridge-logo.png";
 import uniLogo from "@/assets/poznan-university.png";
 
@@ -47,7 +47,7 @@ function Landing() {
           The complete institutional platform to automate onboarding, mentor matching, and social impact tracking for municipalities and universities.
         </p>
 
-        <div className="mt-10 flex items-center justify-center gap-4 animate-fade-in-up delay-600">
+        <div className="mt-10 flex flex-wrap items-center justify-center gap-4 animate-fade-in-up delay-600">
           <Link
             to="/dashboard"
             className="group relative inline-flex items-center justify-center gap-2 rounded-2xl bg-[#ffd03a] px-8 sm:px-10 py-5 sm:py-6 text-lg sm:text-xl font-bold text-[#014bad] shadow-yellow ring-2 ring-[#014bad]/10 transition-all duration-300 hover:scale-[1.04] hover:bg-[#ffc21a] hover:shadow-[0_20px_60px_-15px_rgba(255,208,58,0.9)] active:scale-100 animate-pulse-glow"
@@ -55,7 +55,18 @@ function Landing() {
             Enter Dashboard
             <ArrowRight className="h-6 w-6 transition-transform group-hover:translate-x-1" />
           </Link>
+          <Link
+            to="/report"
+            className="group inline-flex items-center justify-center gap-2 rounded-2xl bg-white px-6 sm:px-8 py-5 sm:py-6 text-base sm:text-lg font-semibold text-[#014bad] ring-2 ring-[#014bad]/20 shadow-soft transition-all duration-300 hover:scale-[1.04] hover:ring-[#014bad]/40 hover:shadow-elevated"
+          >
+            <ShieldAlert className="h-5 w-5" />
+            Report Misbehavior
+          </Link>
         </div>
+
+        <p className="mt-4 text-xs text-slate-500 animate-fade-in delay-600">
+          See something concerning? Submit a confidential report — reviewed by our Trust &amp; Safety team within 24h.
+        </p>
 
         <div className="mt-6 space-y-2 animate-fade-in delay-600">
           <p className="text-xs text-slate-500">
