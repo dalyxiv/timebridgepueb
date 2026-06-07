@@ -9,8 +9,8 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 export default defineConfig({
-  // Use the exact repo name with slashes
-  base: "/timebridgepueb/", 
+  // FIXED: Changed to root path
+  base: "/", 
   plugins: [
     TanStackRouterVite(),
     react(),
@@ -27,7 +27,6 @@ export default defineConfig({
   },
   build: {
     outDir: 'dist',
-    // This ensures all assets go into a folder named assets
     assetsDir: 'assets', 
   }
 });
