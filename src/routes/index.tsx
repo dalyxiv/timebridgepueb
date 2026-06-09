@@ -2,6 +2,8 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Sparkles, Users, BarChart3, Heart, ShieldCheck, Zap, ShieldAlert } from "lucide-react";
 import logo from "@/assets/timebridge-logo.png";
 import uniLogo from "@/assets/poznan-university.png";
+import { SplashIntro } from "@/components/SplashIntro";
+import { BridgeBackdrop } from "@/components/BridgeBackdrop";
 
 export const Route = createFileRoute("/")({
   component: Landing,
@@ -10,12 +12,14 @@ export const Route = createFileRoute("/")({
 function Landing() {
   return (
     <div className="relative min-h-screen overflow-hidden bg-background">
+      <SplashIntro />
       {/* animated background blobs */}
       <div className="pointer-events-none absolute inset-0 -z-10">
         <div className="absolute -top-40 -left-32 h-[28rem] w-[28rem] rounded-full bg-[#014bad]/20 blur-3xl animate-blob" />
         <div className="absolute -top-20 right-[-8rem] h-[26rem] w-[26rem] rounded-full bg-[#ffd03a]/30 blur-3xl animate-blob delay-200" />
         <div className="absolute bottom-[-10rem] left-1/3 h-[24rem] w-[24rem] rounded-full bg-[#014bad]/15 blur-3xl animate-blob delay-400" />
       </div>
+      <BridgeBackdrop />
 
       {/* nav */}
       <header className="relative z-10 mx-auto max-w-7xl px-6 py-6 flex items-center justify-between animate-fade-in">
@@ -68,15 +72,15 @@ function Landing() {
           See something concerning? Submit a confidential report — reviewed by our Trust &amp; Safety team within 24h.
         </p>
 
-        <div className="mt-6 space-y-2 animate-fade-in delay-600">
-          <p className="text-xs text-slate-500">
-            Trusted research initiative · Poznań University of Economics and Business
+        <div className="mt-8 space-y-3 animate-fade-in delay-600">
+          <p className="text-sm sm:text-base text-slate-600">
+            Trusted research initiative · <span className="font-semibold text-[#014bad]">Poznań University of Economics and Business</span>
           </p>
-          <p className="text-xs text-slate-600">
-            Created by: <span className="font-semibold text-[#014bad]">Menghu Shu</span> &amp; <span className="font-semibold text-[#014bad]">Michał Raczunas</span> &amp; <span className="font-semibold text-[#014bad]">Mostafa ElDaly</span>
+          <p className="text-base sm:text-lg text-slate-700">
+            Created by <span className="font-bold text-[#014bad]">Menghu Shu</span>, <span className="font-bold text-[#014bad]">Michał Raczunas</span> &amp; <span className="font-bold text-[#014bad]">Mostafa ElDaly</span>
           </p>
-          <p className="text-xs text-slate-500">
-            under supervision of: <span className="font-medium text-slate-700">dr inż. Aleksandra Szulczewska-Remi</span>
+          <p className="text-sm sm:text-base text-slate-700">
+            under the supervision of <span className="font-semibold text-[#014bad]">dr inż. Aleksandra Szulczewska-Remi</span>
           </p>
         </div>
       </section>
@@ -123,7 +127,7 @@ function Landing() {
             { k: "120+", v: "Seniors onboarded" },
             { k: "85", v: "Active mentors" },
             { k: "1,400h", v: "Mentorship logged" },
-            { k: "12", v: "Partner institutions" },
+            { k: "16", v: "Partner institutions" },
           ].map((s) => (
             <div key={s.v} className="relative">
               <div className="text-3xl sm:text-4xl font-bold text-[#ffd03a]">{s.k}</div>
