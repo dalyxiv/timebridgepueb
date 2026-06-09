@@ -69,8 +69,26 @@ function Stat({ icon: Icon, label, value, delta, accent }: any) {
 function BecomePartnerDialog() {
   const [open, setOpen] = useState(false);
   const [org, setOrg] = useState("");
+  const [contact, setContact] = useState("");
   const [email, setEmail] = useState("");
   const [tier, setTier] = useState("Gold Partner");
+  const [message, setMessage] = useState("");
+
+  const submit = () => {
+    if (!org.trim() || !email.trim() || !contact.trim()) {
+      toast.error("Please fill in your name, organization and email");
+      return;
+    }
+    const subject = encodeURIComponent(`TimeBridge Partnership Inquiry — ${org} (${tier})`);
+    const body = encodeURIComponent(
+      `Hello TimeBridge team,\n\nMy name is ${contact} from ${org}.\nWe are interested in the ${tier} partnership.\n\n${message || "Please send us more information."}\n\nReply-to: ${email}\n\nBest regards,\n${contact}`
+    );
+    // Open the user's email client with a pre-filled message to our partnerships inbox
+    window.location.href = `mailto:partners@timebridge.eu?subject=${subject}&body=${body}`;
+    toast.success("Opening your email client…", { description: `${org} · ${tier}` });
+    setOrg(""); setContact(""); setEmail(""); setMessage(""); setOpen(false);
+  };
+
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
@@ -81,8 +99,12 @@ function BecomePartnerDialog() {
       <DialogContent className="max-w-md">
         <DialogHeader>
           <DialogTitle>Partner with TimeBridge</DialogTitle>
+          <p className="text-xs text-muted-foreground mt-1">
+            Send our partnerships team a message — we'll reply within 2 working days.
+          </p>
         </DialogHeader>
         <div className="space-y-3 py-2">
+          <div><Label className="text-xs">Your name</Label><Input value={contact} onChange={(e) => setContact(e.target.value)} placeholder="Jane Doe" /></div>
           <div><Label className="text-xs">Organization</Label><Input value={org} onChange={(e) => setOrg(e.target.value)} placeholder="Your institution" /></div>
           <div><Label className="text-xs">Contact email</Label><Input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="contact@org.eu" /></div>
           <div>
@@ -91,17 +113,22 @@ function BecomePartnerDialog() {
               {tiers.map((t) => <option key={t.name}>{t.name}</option>)}
             </select>
           </div>
+          <div>
+            <Label className="text-xs">Message (optional)</Label>
+            <textarea
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+              rows={3}
+              placeholder="Tell us a bit about your goals…"
+              className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
+            />
+          </div>
         </div>
         <DialogFooter>
           <Button variant="outline" onClick={() => setOpen(false)}>Cancel</Button>
-          <Button
-            className="bg-brand text-brand-foreground hover:bg-brand/90"
-            onClick={() => {
-              if (!org.trim() || !email.trim()) { toast.error("Please fill in all fields"); return; }
-              toast.success("Partnership inquiry submitted", { description: `${org} · ${tier}` });
-              setOrg(""); setEmail(""); setOpen(false);
-            }}
-          >Submit inquiry</Button>
+          <Button className="bg-brand text-brand-foreground hover:bg-brand/90" onClick={submit}>
+            <Mail className="h-4 w-4" /> Send inquiry
+          </Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>

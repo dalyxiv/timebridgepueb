@@ -32,15 +32,16 @@ export function PersonForm({ trigger, role, onSubmit }: Props) {
 
   const submit = () => {
     if (!name.trim()) { toast.error("Please enter a full name"); return; }
-    if (role === "senior" && (!age || Number(age) < 1)) { toast.error("Please enter a valid age"); return; }
-    if (skills.length === 0) { toast.error(role === "senior" ? "Select at least one tech need" : "Select at least one tech skill"); return; }
-    if (availability.length === 0) { toast.error("Select at least one availability slot"); return; }
+    // Lenient defaults: if availability/skills are empty, pick a sensible default
+    // so the user can onboard quickly without filling every box.
+    const finalSkills = skills.length ? skills : [ALL_SKILLS[0]];
+    const finalAvailability = availability.length ? availability : [AVAILABILITY[0]];
     onSubmit({
       name: name.trim(),
-      age: role === "senior" ? Number(age) || 65 : undefined,
+      age: role === "senior" ? (Number(age) > 0 ? Number(age) : 65) : undefined,
       grade: role === "student" ? grade : undefined,
-      skills,
-      availability,
+      skills: finalSkills,
+      availability: finalAvailability,
     });
     reset();
     setOpen(false);
